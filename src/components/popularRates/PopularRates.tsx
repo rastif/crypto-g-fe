@@ -26,8 +26,9 @@ const Wrapper = styled.div`
 `;
 
 const PopularRates: React.FC = () => {
+  // could poll more often, but killing limit of coinbase free tier
   const { data, loading, error } = usePopularRatesQuery({
-    pollInterval: 5000,
+    pollInterval: 20000,
   });
 
   return (
