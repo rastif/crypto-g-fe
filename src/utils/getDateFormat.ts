@@ -1,4 +1,4 @@
-const getDateFormat = (time: string) => {
+const getDateFormat = (time?: string | string[]) => {
   switch (time) {
     case "1Y":
       return "MMM yyyy";
