@@ -34,13 +34,16 @@ const Chart: React.FC<Props> = ({ data, loading }) => {
     query: { time },
   } = useRouter();
 
-  const formatedDataPoints = formatHistoricalDataPoints(data, time as string);
+  const formatedDataPoints = formatHistoricalDataPoints({
+    data,
+    time: time as string,
+  });
 
   return (
     <Wrapper>
       {loading ? (
         <Skeleton active />
-      ) : formatedDataPoints?.length < 1 ? (
+      ) : !formatedDataPoints || formatedDataPoints.length < 1 ? (
         <h1>No historical data...</h1>
       ) : (
         <ResponsiveContainer>
