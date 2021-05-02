@@ -15,7 +15,7 @@ import Skeleton from "components/Skeleton";
 import ChartTooltip from "./ChartTooltip";
 
 type Props = {
-  data: HistoricalRate[];
+  data?: HistoricalRate[];
   loading: boolean;
 };
 

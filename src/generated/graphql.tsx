@@ -42,10 +42,10 @@ export type HistoricalRate = {
 
 export type Query = {
   __typename?: 'Query';
-  assets?: Maybe<Array<Asset>>;
+  assets: Array<Asset>;
   rate: Rate;
-  historicalRates?: Maybe<Array<HistoricalRate>>;
-  popularRates?: Maybe<Array<Rate>>;
+  historicalRates: Array<HistoricalRate>;
+  popularRates: Array<Rate>;
 };
 
 
@@ -81,10 +81,10 @@ export type HistoricalRatesQueryVariables = Exact<{
 
 export type HistoricalRatesQuery = (
   { __typename?: 'Query' }
-  & { historicalRates?: Maybe<Array<(
+  & { historicalRates: Array<(
     { __typename?: 'HistoricalRate' }
     & Pick<HistoricalRate, 'time_period_start' | 'price_close' | 'price_high' | 'price_low'>
-  )>> }
+  )> }
 );
 
 export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -92,10 +92,10 @@ export type AssetsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AssetsQuery = (
   { __typename?: 'Query' }
-  & { assets?: Maybe<Array<(
+  & { assets: Array<(
     { __typename?: 'Asset' }
     & Pick<Asset, 'asset_id' | 'name'>
-  )>> }
+  )> }
 );
 
 export type PopularRatesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -103,10 +103,10 @@ export type PopularRatesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PopularRatesQuery = (
   { __typename?: 'Query' }
-  & { popularRates?: Maybe<Array<(
+  & { popularRates: Array<(
     { __typename?: 'Rate' }
     & Pick<Rate, 'asset_id_base' | 'rate'>
-  )>> }
+  )> }
 );
 
 

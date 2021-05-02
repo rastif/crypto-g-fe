@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { gql } from "@apollo/client";
-import { useHistoricalRatesQuery } from "generated/graphql";
+import { useHistoricalRatesQuery, HistoricalRate } from "generated/graphql";
 import Chart from "components/chart/Chart";
 import ChartFilter from "components/chart/filter/Filter";
 import getPastDateParams from "utils/getPastDateParams";
@@ -59,7 +59,10 @@ const History: React.FC = () => {
     <>
       <ChartFilter />
       {asset && !error ? (
-        <Chart data={data?.historicalRates} loading={loading} />
+        <Chart
+          data={data?.historicalRates as HistoricalRate[]}
+          loading={loading}
+        />
       ) : (
         <H1>{error ? ERR_MSG : SELECT_CURRENCY_MSG}</H1>
       )}
