@@ -48,3 +48,9 @@ yarn dev
 - [] wrap app with style-theme and no loose css props
 - [] err handling
 - ...
+
+### Screenshots
+
+![screenshot1](screenshot1.png)
+
+![screenshot2](screenshot2.png)
