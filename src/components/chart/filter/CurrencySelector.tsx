@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
 import { gql } from "@apollo/client";
 import { useAssetsQuery, Asset } from "generated/graphql";
 import stringifyUrl from "utils/stringifyUrl";
@@ -24,6 +24,8 @@ const CurrencySelector: React.FC = () => {
     const newUrl = stringifyUrl(pathname, { ...query, asset: val });
     replace(newUrl);
   };
+
+  if (loading) return <Skeleton.Input style={{ width: 200 }} active />;
 
   return (
     <Select
