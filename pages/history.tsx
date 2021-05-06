@@ -13,22 +13,21 @@ const SELECT_CURRENCY_MSG = "Select a currency to see a historical graph";
 const HISTORICAL_RATES_QUERY = gql`
   query HistoricalRates(
     $asset_id_base: String!
-    $asset_id_quote: String!
-    $period_id: String!
+    $granularity: Int!
     $time_start: String!
-    $time_end: String
+    $time_end: String!
   ) {
     historicalRates(
       asset_id_base: $asset_id_base
-      asset_id_quote: $asset_id_quote
-      period_id: $period_id
+      granularity: $granularity
       time_start: $time_start
       time_end: $time_end
     ) {
-      time_period_start
-      price_close
-      price_high
+      time
       price_low
+      price_high
+      price_open
+      price_close
     }
   }
 `;
@@ -48,10 +47,10 @@ const History: React.FC = () => {
   const { data, loading, error } = useHistoricalRatesQuery({
     skip: !asset,
     variables: {
-      asset_id_base: asset as string,
-      asset_id_quote: "USD",
-      period_id: date.period_id,
+      asset_id_base: `${asset}-USD`,
+      granularity: date.granularity,
       time_start: date.time_start,
+      time_end: date.time_end,
     },
   });
 

@@ -4,14 +4,14 @@ import getDateFormat from "./getDateFormat";
 
 const formatHistoricalDataPoints = ({
   data,
-  time,
+  intervall,
 }: {
   data?: HistoricalRate[];
-  time?: string | string[];
+  intervall?: string | string[];
 }) =>
-  data?.map(({ time_period_start, ...rest }) => ({
+  data?.map(({ time, ...rest }) => ({
     ...rest,
-    time_period_start: format(new Date(time_period_start), getDateFormat(time)),
+    time: format(new Date(time * 1000), getDateFormat(intervall)),
   }));
 
 export default formatHistoricalDataPoints;

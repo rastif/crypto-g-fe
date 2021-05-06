@@ -4,6 +4,7 @@ import Link from "components/Link";
 import BtcSvg from "assets/icons/btc.svg";
 import EthSvg from "assets/icons/eth.svg";
 import XrpSvg from "assets/icons/xrp.svg";
+import MkrSvg from "assets/icons/mkr.svg";
 
 type Props = {
   asset_id_base: string;
@@ -13,11 +14,13 @@ type Props = {
 const getIconByName = (asset: string) => {
   switch (asset) {
     case "BTC":
-      return <BtcSvg />;
+      return <BtcSvg style={{ height: "32px" }} />;
     case "ETH":
-      return <EthSvg />;
+      return <EthSvg style={{ height: "32px" }} />;
     case "XRP":
-      return <XrpSvg />;
+      return <XrpSvg style={{ height: "32px" }} />;
+    case "MKR":
+      return <MkrSvg style={{ height: "32px" }} />;
     default:
       return null;
   }

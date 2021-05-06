@@ -30,14 +30,11 @@ export enum CacheControlScope {
 
 export type HistoricalRate = {
   __typename?: 'HistoricalRate';
-  time_period_start: Scalars['String'];
-  time_period_end: Scalars['String'];
-  time_open: Scalars['String'];
-  time_close: Scalars['String'];
+  time: Scalars['Int'];
+  price_low: Scalars['Float'];
+  price_high: Scalars['Float'];
   price_open: Scalars['Float'];
   price_close: Scalars['Float'];
-  price_high: Scalars['Float'];
-  price_low: Scalars['Float'];
 };
 
 export type Query = {
@@ -51,16 +48,14 @@ export type Query = {
 
 export type QueryRateArgs = {
   asset_id_base: Scalars['String'];
-  asset_id_quote: Scalars['String'];
 };
 
 
 export type QueryHistoricalRatesArgs = {
   asset_id_base: Scalars['String'];
-  asset_id_quote: Scalars['String'];
-  period_id: Scalars['String'];
+  granularity: Scalars['Int'];
   time_start: Scalars['String'];
-  time_end?: Maybe<Scalars['String']>;
+  time_end: Scalars['String'];
 };
 
 export type Rate = {
@@ -72,10 +67,9 @@ export type Rate = {
 
 export type HistoricalRatesQueryVariables = Exact<{
   asset_id_base: Scalars['String'];
-  asset_id_quote: Scalars['String'];
-  period_id: Scalars['String'];
+  granularity: Scalars['Int'];
   time_start: Scalars['String'];
-  time_end?: Maybe<Scalars['String']>;
+  time_end: Scalars['String'];
 }>;
 
 
@@ -83,7 +77,7 @@ export type HistoricalRatesQuery = (
   { __typename?: 'Query' }
   & { historicalRates: Array<(
     { __typename?: 'HistoricalRate' }
-    & Pick<HistoricalRate, 'time_period_start' | 'price_close' | 'price_high' | 'price_low'>
+    & Pick<HistoricalRate, 'time' | 'price_low' | 'price_high' | 'price_open' | 'price_close'>
   )> }
 );
 
@@ -111,18 +105,18 @@ export type PopularRatesQuery = (
 
 
 export const HistoricalRatesDocument = gql`
-    query HistoricalRates($asset_id_base: String!, $asset_id_quote: String!, $period_id: String!, $time_start: String!, $time_end: String) {
+    query HistoricalRates($asset_id_base: String!, $granularity: Int!, $time_start: String!, $time_end: String!) {
   historicalRates(
     asset_id_base: $asset_id_base
-    asset_id_quote: $asset_id_quote
-    period_id: $period_id
+    granularity: $granularity
     time_start: $time_start
     time_end: $time_end
   ) {
-    time_period_start
-    price_close
-    price_high
+    time
     price_low
+    price_high
+    price_open
+    price_close
   }
 }
     `;
@@ -140,8 +134,7 @@ export const HistoricalRatesDocument = gql`
  * const { data, loading, error } = useHistoricalRatesQuery({
  *   variables: {
  *      asset_id_base: // value for 'asset_id_base'
- *      asset_id_quote: // value for 'asset_id_quote'
- *      period_id: // value for 'period_id'
+ *      granularity: // value for 'granularity'
  *      time_start: // value for 'time_start'
  *      time_end: // value for 'time_end'
  *   },

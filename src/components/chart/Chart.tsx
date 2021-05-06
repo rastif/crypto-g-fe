@@ -36,7 +36,7 @@ const Chart: React.FC<Props> = ({ data, loading }) => {
 
   const formatedDataPoints = formatHistoricalDataPoints({
     data,
-    time: time as string,
+    intervall: time as string,
   });
 
   return (
@@ -58,7 +58,7 @@ const Chart: React.FC<Props> = ({ data, loading }) => {
             }}
           >
             <Line type="monotone" dataKey="price_close" stroke="#8884d8" />
-            <XAxis dataKey="time_period_start" />
+            <XAxis dataKey="time" />
             <YAxis />
             <Tooltip content={<ChartTooltip />} />
           </LineChart>

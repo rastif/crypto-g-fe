@@ -13,7 +13,8 @@ const Wrapper = styled.div`
 const ChartTooltip: React.FC = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const {
-      time_period_start,
+      time,
+      price_open,
       price_close,
       price_high,
       price_low,
@@ -21,16 +22,19 @@ const ChartTooltip: React.FC = ({ active, payload }: any) => {
     return (
       <Wrapper>
         <p>
-          <b>Time:</b> {time_period_start}
+          <b>Time:</b> {time}
         </p>
         <p>
-          <b>Price closed:</b> {price_close}
+          <b>Price open:</b> {price_open}$
         </p>
         <p>
-          <b>Price high:</b> {price_high}
+          <b>Price closed:</b> {price_close}$
         </p>
         <p>
-          <b>Price low:</b> {price_low}
+          <b>Price high:</b> {price_high}$
+        </p>
+        <p>
+          <b>Price low:</b> {price_low}$
         </p>
       </Wrapper>
     );
